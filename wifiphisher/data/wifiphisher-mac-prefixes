@@ -375,7 +375,7 @@ A8474A|Hon Hai Precision Ind.
 C4ADF1|Gopeace
 58F496|Source Chain
 80B709|Viptela
-1C60DE|Shenzhen Mercury Communication Technologies
+1C60DE|Shenzhen Mercury Communication Technologies|mercury.png
 741865|Shanghai DareGlobal Technologies
 0084ED|Private
 DCDC07|TRP Systems BV
@@ -477,7 +477,7 @@ B0ECE1|Private
 AC9B0A|Sony
 407FE0|Glory Star Technics (ShenZhen) Limited
 BC5C4C|Elecom
-6C5940|Shenzhen Mercury Communication Technologies
+6C5940|Shenzhen Mercury Communication Technologies|mercury.png
 6CA75F|zte
 C8C50E|Shenzhen Primestone Network Technologies.Co.
 9CBEE0|Biosoundlab
@@ -508,7 +508,7 @@ B008BF|Vital Connect
 485415|NET Rules Tecnologia Eireli
 70C76F|Inno
 C48E8F|Hon Hai Precision Ind.
-704E66|Shenzhen Fast Technologies
+704E66|Shenzhen Fast Technologies|fast.png
 1008B1|Hon Hai Precision Ind.
 409B0D|Shenzhen Yourf Kwan Industrial
 C40880|Shenzhen Utepo Tech
@@ -533,7 +533,7 @@ A8D0E3|Systech Electronics
 8463D6|Microsoft
 78B3B9|ShangHai sunup lighting
 586AB1|Hangzhou H3C Technologies, Limited
-F4EE14|Shenzhen Mercury Communication Technologies
+F4EE14|Shenzhen Mercury Communication Technologies|mercury.png
 186571|Top Victory Electronics (Taiwan)
 F8BC41|Rosslare Enterprises Limited
 8486F3|Greenvity Communications
@@ -927,7 +927,7 @@ A42C08|Masterwork Automodules
 8887DD|DarbeeVision
 807B1E|Corsair Components
 A0E25A|Amicus SK, s.r.o.
-F87B62|Fastwel International, Taiwan Branch
+F87B62|Fastwel International, Taiwan Branch|fast.png
 B49842|zte
 9C9C1D|Starkey Labs
 90CC24|Synaptics
@@ -1348,7 +1348,7 @@ A4856B|Q Electronics
 DCCBA8|Explora Technologies
 58EECE|Icon Time Systems
 90004E|Hon Hai Precision Ind.
-A41BC0|Fastec Imaging
+A41BC0|Fastec Imaging|fast.png
 E01F0A|Xslent Energy Technologies.
 F40321|BeNeXt
 00B033|OAO Izhevskiy radiozavod
@@ -1571,7 +1571,7 @@ E8DAAA|VideoHome Technology
 647D81|Yokota Industrial
 8891DD|Racktivity
 C4198B|Dominion Voting Systems
-C83A35|Tenda Technology
+C83A35|Tenda Technology|tenda.png
 F4ACC1|Cisco Systems|ciscosystems.png|cisco.png
 584CEE|Digital One Technologies, Limited
 E064BB|DigiView S.r.l.
@@ -1631,7 +1631,7 @@ A8CE90|CVC
 002620|Isgus Gmbh
 00261A|Femtocomm System Technology
 002613|Engel Axil S.L.
-00260D|Mercury Systems
+00260D|Mercury Systems|mercury.png
 0025D8|Korea Maintenance
 0025CC|Mobile Communications Korea Incorporated
 0025C5|Star Link Communication Pvt.
@@ -3166,7 +3166,7 @@ A8CE90|CVC
 000555|Japan Cash Machine
 000547|Starent Networks
 00054E|Philips
-000540|Fast
+000540|Fast|fast.png
 000541|Advanced Systems
 000534|Northstar Engineering
 0004F4|Infinite Electronics
@@ -3220,7 +3220,7 @@ A8CE90|CVC
 000394|Connect One
 00038D|PCS Revenue Control Systems
 000385|Actelis Networks
-000388|Fastfame Technology
+000388|Fastfame Technology|fast.png
 00037F|Atheros Communications
 0004B8|Kumahira
 0004B2|Essegi SRL
@@ -3343,7 +3343,7 @@ A8CE90|CVC
 0001E5|Supernet
 0001E8|Force10 Networks
 0001D9|Sigma
-0001E0|Fast Systems
+0001E0|Fast Systems|fast.png
 0001D5|Haedong Info & Comm
 000118|EZ Digital
 000124|Acer Incorporated
@@ -4641,7 +4641,7 @@ BC307E|Wistron Neweb
 54BE53|zte
 588BF3|ZyXEL Communications
 A01E0B|Minix Technology Limited
-D48304|Shenzhen Fast Technologies
+D48304|Shenzhen Fast Technologies|fast.png
 385F66|Cisco Spvtg|ciscosystems.png|cisco.png
 544E90|Apple
 28C87A|Pace plc
@@ -5304,7 +5304,7 @@ DC9FA4|Nokia
 D8C691|Hichan Technology
 8CFDF0|Qualcomm Incorporated
 7C02BC|Hansung Electronics
-1848D8|Fastback Networks
+1848D8|Fastback Networks|fast.png
 C819F7|Samsung Electronics
 702393|fos4X GmbH
 C4731E|Samsung Eletronics
@@ -5686,7 +5686,7 @@ DCD0F7|Bentek Systems
 D0574C|Cisco Systems|ciscosystems.png|cisco.png
 8818AE|Tamron
 20D607|Nokia
-58DB8D|Fast
+58DB8D|Fast|fast.png
 18EF63|Cisco Systems|ciscosystems.png|cisco.png
 CCCE40|Janteq
 8C4DEA|Cerio
@@ -7136,7 +7136,7 @@ D0D286|Beckman Coulter K.K.
 000A06|Teledex
 000A09|TaraCom Integrated Products
 000A0B|Sealevel Systems
-000A10|Fast Media Integrations AG
+000A10|Fast Media Integrations AG|fast.png
 0009F7|SED, a division of Calian
 000A01|Sohoware
 0009E9|Cisco Systems|cisco.png
@@ -7734,7 +7734,7 @@ D0D286|Beckman Coulter K.K.
 0090A7|Clientec
 00907F|WatchGuard Technologies
 00907E|Vetronix
-00902F|Netcore Systems
+00902F|Netcore Systems|netcore.png
 00900D|Overland Storage
 009044|Assured Digital
 009078|MER Telemanagement Solutions
@@ -7826,7 +7826,7 @@ A03E6B|Ieee Registration Authority  - Please see MAM Public Listing for More Inf
 001045|Nortel Networks
 00106B|Sonus Networks
 0010EC|RPCG
-001092|Netcore
+001092|Netcore|netcore.png
 0010E2|ArrayComm
 001071|Advanet
 001069|Helioss Communications
@@ -8598,7 +8598,7 @@ E899C4|HTC
 18686A|zte
 0C0535|Juniper Systems
 E0885D|Technicolor CH USA
-8CF228|Shenzhen Mercury Communication Technologies
+8CF228|Shenzhen Mercury Communication Technologies|mercury.png
 08EA44|Aerohive Networks
 78F882|LG Electronics (Mobile Communications)
 8851FB|Hewlett Packard
@@ -8904,7 +8904,7 @@ DC2B2A|Apple
 B83A9D|Five Interactive
 089B4B|iKuai Networks
 3C7873|Airsonics
-BC5FF6|Shenzhen Mercury Communication Technologies
+BC5FF6|Shenzhen Mercury Communication Technologies|mercury.png
 C8F9C8|NewSharp Technology(SuZhou)Co
 3C5CC3|Shenzhen First Blue Chip Technology
 A8741D|Phoenix Contact Electronics Gmbh
@@ -10045,7 +10045,7 @@ FCFBFB|Cisco Systems|cisco.png
 1C129D|Ieee PES Psrc/sub
 B40832|TC Communications
 002720|New-sol COM
-00271C|Mercury
+00271C|Mercury|mercury.png
 002712|MaxVision
 00270F|Envisionnovation
 0026D7|KM Electornic Technology
@@ -12204,7 +12204,7 @@ BC3400|Ieee Registration Authority  - Please see MAM Public Listing for More Inf
 00C0E3|Ositech Communications
 00C071|Areanex Communications
 00C0AF|Teklogix
-00209F|Mercury Computer Systems
+00209F|Mercury Computer Systems|mercury.png
 0020B7|Namaqua Computerware
 00201B|Northern Telecom/network
 0020C0|Pulse Electronics
@@ -12771,7 +12771,7 @@ D8952F|Texas Instruments
 001833|Texas Instruments
 4419B6|Hangzhou Hikvision Digital Technology
 C056E3|Hangzhou Hikvision Digital Technology
-C8E7D8|Shenzhen Mercury Communication Technologies
+C8E7D8|Shenzhen Mercury Communication Technologies|mercury.png
 E01C41|Aerohive Networks
 D854A2|Aerohive Networks
 9CEFD5|Panda Wireless
@@ -13121,7 +13121,7 @@ EC21E5|Toshiba
 44FDA3|Everysight
 84D4C8|Widex A/S
 247260|Iottech
-44975A|Shenzhen Fast Technologies
+44975A|Shenzhen Fast Technologies|fast.png
 584822|Sony Mobile Communications AB
 F8BF09|Huawei Technologies
 B4B265|Daeho I&T
@@ -13141,12 +13141,12 @@ D8ADDD|Sonavation
 C09A71|Xiamen Meitu Mobile Technologyltd
 340B40|Mios Elettronica SRL
 944A0C|Sercomm
-D02516|Shenzhen Mercury Communication Technologies
+D02516|Shenzhen Mercury Communication Technologies|mercury.png
 D05C7A|Sartura d.o.o.
 583F54|LG Electronics (Mobile Communications)
 9C37F4|Huawei Technologies
 5CEB68|Cheerstar Technology
-F46A92|Shenzhen Fast Technologies
+F46A92|Shenzhen Fast Technologies|fast.png
 14AEDB|VTech Telecommunications
 EC4F82|Calix
 B8C3BF|Henan Chengshi NetWork TechnologyLtd
@@ -13181,7 +13181,7 @@ BC74D7|HangZhou JuRu Technology
 E88E60|NSD
 545146|AMG Systems
 84DDB7|Cilag GmbH International
-78EB14|Shenzhen Fast Technologies
+78EB14|Shenzhen Fast Technologies|fast.png
 D05BA8|zte
 8CE78C|DK Networks
 E4BAD9|360 Fly
@@ -14938,7 +14938,7 @@ EC3091|Cisco Systems|cisco.png
 001990|ELM Data
 001989|Sonitrol
 001A45|GN Netcom as
-001A3E|Faster Technology
+001A3E|Faster Technology|fast.png
 001A40|A-four Tech
 001A2D|The Navvo Group
 001A32|Activa Multimedia
@@ -17313,7 +17313,7 @@ F0CBA1|Apple
 842999|Apple
 74E2F5|Apple
 20C9D0|Apple
-488AD2|Shenzhen Mercury Communication Technologies
+488AD2|Shenzhen Mercury Communication Technologies|mercury.png
 04489A|Apple
 D8CF9C|Apple
 A88E24|Apple
@@ -17717,7 +17717,7 @@ A07771|Vialis BV
 D0BD01|DS International
 C0C569|Shanghai Lynuc CNC Technology
 200E95|IEC  TC9 Wg43
-085DDD|Mercury
+085DDD|Mercury|mercury.png
 88B1E1|AirTight Networks
 98349D|Krauss Maffei Technologies GmbH
 18CC23|Philio Technology
@@ -17845,7 +17845,7 @@ C06599|Samsung Electronics
 949FB4|ChengDu JiaFaAnTai Technology
 406826|Thales UK Limited
 5C15E1|Aidc Technology (S) PTE
-048D38|Netcore Technology
+048D38|Netcore Technology|netcore.png
 70E027|Hongyu Communication Technology Limited
 E880D8|Gntek Electronics
 889B39|Samsung Electronics
@@ -19414,7 +19414,7 @@ DC3350|TechSAT GmbH
 0016F6|Video Products Group
 0016F8|Aviqtech Technology
 0016E5|Fordley Development Limited
-0016DE|Fast
+0016DE|Fast|fast.png
 0016A9|2EI
 0016AE|Inventel
 00169D|Cisco Systems|cisco.png
@@ -19644,7 +19644,7 @@ DC3350|TechSAT GmbH
 000FF8|Cisco Systems|cisco.png
 000FF2|Loud Technologies
 000FF7|Cisco Systems|cisco.png
-000FE5|Mercury Security
+000FE5|Mercury Security|mercury.png
 000FE6|MBTech Systems
 000FEB|Cylon Controls
 000FDF|Solomon Technology
@@ -21313,7 +21313,7 @@ A8A089|Tactical Communications
 E498D1|Microsoft Mobile Oy
 0014A5|Gemtek Technology
 001742|Fujitsu Limited
-005A39|Shenzhen Fast Technologies
+005A39|Shenzhen Fast Technologies|fast.png
 5CC6D0|Skyworth Digital Technology(Shenzhen)
 080581|Roku
 B0A737|Roku

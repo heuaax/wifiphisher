@@ -51,3 +51,7 @@ docs/_build/
 
 # PyBuilder
 target/
+wifiphisher/data/.DS_Store
+wifiphisher/data/logos/.DS_Store
+wifiphisher/data/phishing-pages/.DS_Store
+wifiphisher/data/phishing-pages/firmware-upgrade/.DS_Store
