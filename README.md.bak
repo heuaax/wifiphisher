@@ -1,11 +1,11 @@
 <p align="center"><img src="https://sophron.github.io/wifiphisher/wifiphisher.png" /></p>
 
-## 说明
-<a href="https://wifiphisher.org">Wifiphisher</a> 是一个安全工具 that mounts automated victim-customized phishing attacks against WiFi clients in order to obtain credentials or infect the victims with malwares. It is primarily a social engineering attack that unlike other methods it does not include any brute forcing. It is an easy way for obtaining credentials from captive portals and third party login pages (例如在社交网络) or WPA/WPA2 密码.
+## About
+<a href="https://wifiphisher.org">Wifiphisher</a> is a security tool that mounts automated victim-customized phishing attacks against WiFi clients in order to obtain credentials or infect the victims with malwares. It is primarily a social engineering attack that unlike other methods it does not include any brute forcing. It is an easy way for obtaining credentials from captive portals and third party login pages (e.g. in social networks) or WPA/WPA2 pre-shared keys.
 
-Wifiphisher 运行在 Kali Linux  GPL 许可证.
+Wifiphisher works on Kali Linux and is licensed under the GPL license.
 
-## 运行原理
+## How it works
 After achieving a man-in-the-middle position using the Evil Twin attack, Wifiphisher redirects all HTTP requests to an attacker-controlled phishing page.
 
 From the victim's perspective, the attack makes use in three phases:
@@ -16,38 +16,38 @@ From the victim's perspective, the attack makes use in three phases:
 
 <p align="center"><img width="70%" src="https://sophron.github.io/wifiphisher/diagram.jpg" /><br /><i>Performing MiTM attack</i></p>
 
-## 要求
-运行 Wifiphisher 的必备条件:
+## Requirements
+Following are the requirements for getting the most out of Wifiphisher:
 
-* Kali Linux.官方推荐运行系统 Although people have made Wifiphisher work on other distros, Kali Linux is the officially supported distribution, thus all new features are primarily tested on this platform.
-* 一块支持 AP 模式的网卡. 驱动支持 netlink.
-* 一块监听模式的网卡来捕获注入数据包. 如果第二块网卡不能用, 你或许使用了 --nojamming 命令选项. 这回关闭攻击命令.
+* Kali Linux. Although people have made Wifiphisher work on other distros, Kali Linux is the officially supported distribution, thus all new features are primarily tested on this platform.
+* One wireless network adapter that supports AP mode. Drivers should support netlink.
+* One wireless network adapter that supports Monitor mode and is capable of injection. Again, drivers should support netlink. If a second wireless network adapter is not available, you may run the tool with the --nojamming option. This will turn off the de-authentication attack though.
 
-## 安装
+## Installation
 
-输入一下命令安装:
+To install the latest development version type the following commands:
 
-```命令
-git clone https://github.com/sophron/wifiphisher.git # 下载最新版本
-cd wifiphisher # 切换到文件所在目录
-sudo python setup.py install # 安装依赖 (Currently, hostapd, PyRIC, jinja2)
+```bash
+git clone https://github.com/sophron/wifiphisher.git # Download the latest revision
+cd wifiphisher # Switch to tool's directory
+sudo python setup.py install # Install any dependencies (Currently, hostapd, PyRIC, jinja2)
 ```
 
-当然你也可以下载 <a href="https://github.com/sophron/wifiphisher/releases">稳定版</a>.
+Alternatively, you can download the latest stable version from the <a href="https://github.com/sophron/wifiphisher/releases">Releases page</a>.
 
-## 使用
+## Usage
 
-在文件所在目录下输入 `wifiphisher` 或 `python bin/wifiphisher` .
+Run the tool by typing `wifiphisher` or `python bin/wifiphisher` (from inside the tool's directory).
 
-这将自动扫描附近wifi并根据提示伪造wifi，并启动钓鱼场景.
+By running the tool without any options, it will find the right interfaces and interactively ask the user to pick the ESSID of the target network (out of a list with all the ESSIDs in the around area) as well as a phishing scenario to perform.
 
 ***
 
-```命令行
+```shell
 wifiphisher -aI wlan0 -jI wlan4 -p firmware-upgrade
 ```
 
-使用 wlan0 伪造wifi热点 ， wlan4 作为攻击使用，使用固件升级场景钓鱼 "Firmware Upgrade" .
+Use wlan0 for spawning the rogue Access Point and wlan4 for DoS attacks. Select the target network manually from the list and perform the "Firmware Upgrade" scenario.
 
 Useful for manually selecting the wireless adapters. The <a href="https://wifiphisher.org/ps/firmware-upgrade/">"Firware Upgrade"</a> scenario is an easy way for obtaining the PSK from a password-protected network.
 
