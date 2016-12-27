@@ -1,4 +1,10 @@
-Wifiphisher v1.2 [2016-12-04] 
+Wifiphisher v1.2 [2016-12-27]
+
+o 汉化翻译 [@jeeinn]
+o 增加国内路由器识别和图标 如水星、腾达、迅捷等 [@jeeinn]
+o 固件升级页面改为了网络修复[@jeeinn]
+
+Wifiphisher v1.2 [2016-12-04]
 
 o Web server now starts after DHCP [@sophron]
 o Support logging of multiple POST values [@sophron]

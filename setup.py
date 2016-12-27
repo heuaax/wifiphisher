@@ -8,7 +8,7 @@ setup(
 name = "wifiphisher",
 author = "sophron|jeeinn",
 author_email = "sophron@latthi.com",
-description = ("利用模拟Wi-Fi热点钓鱼"),
+description = ("利用伪造Wi-Fi热点钓鱼"),
 license = "GPL",
 keywords = ['wifiphisher', '中文版', '汉化版', 'phishing'],
 packages = find_packages(),
@@ -54,8 +54,8 @@ def get_dnsmasq():
 def get_hostapd():
     if not os.path.isfile('/usr/sbin/hostapd'):
         install = raw_input(
-            ('[' + T + '*' + W + ']' +
-             '在 /usr/sbin/hostapd未找到hostapd, 现在安装? [y/n] ')
+            ('[' + T + '*' + W + ']' + 'hostapd' +
+             '在 /usr/sbin/hostapd 未找到, 现在安装? [y/n] ')
         )
         if install == 'y':
             if os.path.isfile('/usr/bin/pacman'):
@@ -120,4 +120,6 @@ print "   /_\      \ V  V /| | | | | |_) | | | | \__ \ | | |  __/ |   "
 print "  /___\      \_/\_/ |_|_| |_| .__/|_| |_|_|___/_| |_|\___|_|   "
 print " /     \                    | |                                "
 print "                            |_|                                "
+print "                                                               "
+print "                    jeeinn 首发汉化 2016/12/27                  "
 print "                                                               "
