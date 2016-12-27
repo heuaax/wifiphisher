@@ -6,11 +6,11 @@ from distutils.spawn import find_executable
 from wifiphisher.constants import *
 setup(
 name = "wifiphisher",
-author = "sophron",
+author = "sophron|jeeinn",
 author_email = "sophron@latthi.com",
-description = ("Automated phishing attacks against Wi-Fi networks"),
+description = ("利用模拟Wi-Fi热点钓鱼"),
 license = "GPL",
-keywords = ['wifiphisher', 'evil', 'twin', 'phishing'],
+keywords = ['wifiphisher', '中文版', '汉化版', 'phishing'],
 packages = find_packages(),
 include_package_data = True,
 version = "1.2",
@@ -27,8 +27,8 @@ install_requires = [
 def get_dnsmasq():
     if not os.path.isfile('/usr/sbin/dnsmasq'):
         install = raw_input(
-            ('[' + T + '*' + W + '] dnsmasq not found ' +
-             'in /usr/bin/dnsmasq, install now? [y/n] ')
+            ('[' + T + '*' + W + '] dnsmasq 未找到 ' +
+             '在 /usr/bin/dnsmasq, 现在安装? [y/n] ')
         )
         if install == 'y':
             if os.path.isfile('/usr/bin/pacman'):
@@ -39,23 +39,23 @@ def get_dnsmasq():
                 os.system('apt-get -y install dnsmasq')
         else:
             sys.exit(('[' + R + '-' + W + '] dnsmasq' +
-                     ' not found in /usr/sbin/dnsmasq'))
+                     ' 在 /usr/sbin/dnsmasq 未找到'))
     if not os.path.isfile('/usr/sbin/dnsmasq'):
         sys.exit((
-            '\n[' + R + '-' + W + '] Unable to install the \'dnsmasq\' package!\n' +
-            '[' + T + '*' + W + '] This process requires a persistent internet connection!\n' +
-            'Please follow the link below to configure your sources.list\n' +
+            '\n[' + R + '-' + W + '] 不能安装 \'dnsmasq\' 包!\n' +
+            '[' + T + '*' + W + '] 当前网络未连接!\n' +
+            '请根据链接配置你的 sources.list\n' +
             B + 'http://docs.kali.org/general-use/kali-linux-sources-list-repositories\n' + W +
-            '[' + G + '+' + W + '] Run apt-get update for changes to take effect.\n' +
-            '[' + G + '+' + W + '] Rerun the script to install dnsmasq.\n' +
-            '[' + R + '!' + W + '] Closing'
+            '[' + G + '+' + W + '] 运行 apt-get update 来更新.\n' +
+            '[' + G + '+' + W + '] 重新运行脚本来安装 dnsmasq.\n' +
+            '[' + R + '!' + W + '] 关闭中...'
          ))
 
 def get_hostapd():
     if not os.path.isfile('/usr/sbin/hostapd'):
         install = raw_input(
-            ('[' + T + '*' + W + '] hostapd not found ' +
-             'in /usr/sbin/hostapd, install now? [y/n] ')
+            ('[' + T + '*' + W + ']' +
+             '在 /usr/sbin/hostapd未找到hostapd, 现在安装? [y/n] ')
         )
         if install == 'y':
             if os.path.isfile('/usr/bin/pacman'):
@@ -66,44 +66,44 @@ def get_hostapd():
                 os.system('apt-get -y install hostapd')
         else:
             sys.exit(('[' + R + '-' + W + '] hostapd' +
-                     ' not found in /usr/sbin/hostapd'))
+                     ' 在 /usr/sbin/hostapd 未找到'))
     if not os.path.isfile('/usr/sbin/hostapd'):
         sys.exit((
-            '\n[' + R + '-' + W + '] Unable to install the \'hostapd\' package!\n' +
-            '[' + T + '*' + W + '] This process requires a persistent internet connection!\n' +
-            'Please follow the link below to configure your sources.list\n' +
+            '\n[' + R + '-' + W + '] 不能安装 \'hostapd\' 包!\n' +
+            '[' + T + '*' + W + '] 当前网络未连接!\n' +
+            '请根据链接配置你的 sources.list\n' +
             B + 'http://docs.kali.org/general-use/kali-linux-sources-list-repositories\n' + W +
-            '[' + G + '+' + W + '] Run apt-get update for changes to take effect.\n' +
-            '[' + G + '+' + W + '] Rerun the script to install hostapd.\n' +
-            '[' + R + '!' + W + '] Closing'
+            '[' + G + '+' + W + '] 运行 apt-get update 来更新.\n' +
+            '[' + G + '+' + W + '] 重新运行脚本来安装 hostapd.\n' +
+            '[' + R + '!' + W + '] 关闭中...'
          ))
 
 def get_ifconfig():
     # This is only useful for Arch Linux which does not contain ifconfig by default
     if not find_executable('ifconfig'):
         install = raw_input(
-            ('[' + T + '*' + W + '] ifconfig not found. ' +
-             'install now? [y/n] ')
+            ('[' + T + '*' + W + '] ifconfig 命令未找到. ' +
+             '现在安装? [y/n] ')
         )
         if install == 'y':
             if os.path.isfile('/usr/bin/pacman'):
                 os.system('pacman -S net-tools')
             else:
                 sys.exit((
-                    '\n[' + R + '-' + W + '] Don\'t know how to install ifconfig for your distribution.\n' +
-                    '[' + G + '+' + W + '] Rerun the script after installing it manually.\n' +
-                    '[' + R + '!' + W + '] Closing'
+                    '\n[' + R + '-' + W + '] 安装 ifconfig 失败.\n' +
+                    '[' + G + '+' + W + '] 重新运行脚本.\n' +
+                    '[' + R + '!' + W + '] 关闭中...'
                 ))
         else:
             sys.exit(('[' + R + '-' + W + '] ifconfig' +
-                     ' not found'))
+                     ' 未找到'))
     if not find_executable('ifconfig'):
         sys.exit((
-            '\n[' + R + '-' + W + '] Unable to install the \'net-tools\' package!\n' +
-            '[' + T + '*' + W + '] This process requires a persistent internet connection!\n' +
-            '[' + G + '+' + W + '] Run pacman -Syu to make sure you are up to date first.\n' +
-            '[' + G + '+' + W + '] Rerun the script to install net-tools.\n' +
-            '[' + R + '!' + W + '] Closing'
+            '\n[' + R + '-' + W + '] 不能安装 \'net-tools\' 包!\n' +
+            '[' + T + '*' + W + '] 当前网络未连接!\n' +
+            '[' + G + '+' + W + '] 运行 pacman -Syu 确认更新.\n' +
+            '[' + G + '+' + W + '] 重新运行脚本来安装net-tools.\n' +
+            '[' + R + '!' + W + '] 关闭中...'
          ))
 
 # Get hostapd, dnsmasq or ifconfig if needed
