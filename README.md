@@ -28,7 +28,7 @@ Wifiphisher 运行在 `Kali Linux` 系统上，使用 `GPL` 许可证.
 输入一下命令安装:
 
 ```
-git clone https://github.com/sophron/wifiphisher.git # 下载最新版本
+git clone https://github.com/jeeinn/wifiphisher.git # 下载最新版本
 cd wifiphisher # 切换到文件所在目录
 sudo python setup.py install # 安装依赖 (例如： hostapd, PyRIC, jinja2)
 ```
